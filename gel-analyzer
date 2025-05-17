@@ -1,0 +1,13 @@
+# Go to the folder where the zip was extracted
+cd path/to/gel_genotyper_project
+
+# Initialize git and commit your code
+git init
+git add .
+git commit -m "Initial commit"
+
+# Link it to GitHub (replace USERNAME with your GitHub username)
+git remote add origin https://github.com/USERNAME/gel-genotyper.git
+
+# Push the code
+git push -u origin main
