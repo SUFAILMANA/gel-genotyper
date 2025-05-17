@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <title>Results</title>
+    <style>
+        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Analysis Results</h1>
+    <img src="{{ url_for('uploaded_file', filename=image_filename) }}" width="600"><br><br>
+    <table>
+        <tr><th>Lane</th><th>Band Sizes (bp)</th><th>Genotype</th></tr>
+        {% for result in results %}
+        <tr>
+            <td>{{ result.lane }}</td>
+            <td>{{ result.bands }}</td>
+            <td>{{ result.genotype }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <button onclick="copyToClipboard()">Copy Table</button>
+    <script>
+    function copyToClipboard() {
+        let text = '';
+        document.querySelectorAll('table tr').forEach(row => {
+            let rowData = [];
+            row.querySelectorAll('th, td').forEach(cell => rowData.push(cell.innerText));
+            text += rowData.join('\t') + '\n';
+        });
+        navigator.clipboard.writeText(text).then(() => alert('Results copied to clipboard!'));
+    }
+    </script>
+    <br><a href="/">Analyze Another Image</a>
+</body>
+</html>
